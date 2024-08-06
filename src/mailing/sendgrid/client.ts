@@ -15,7 +15,7 @@ export async function sendEmail(
                 to: [{ email: to }]
             }
         ],
-        from: { email: from },
+        from: { email: from, name: 'Inter-concept Internal'},
         subject,
         content: [{
             type: 'text/html',

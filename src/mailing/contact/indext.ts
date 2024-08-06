@@ -27,11 +27,18 @@ export async function sendContactEmail(
   const phone = formData.get('phone')
   const senderEmail = formData.get('email')
   const message = formData.get('message')
+  const emailRecipient = formData.get('emailRecipient')
+
+  if (
+    !emailRecipient || typeof emailRecipient !== 'string'
+  ) {
+    throw Error('The email recipient must be part of the request.')
+  }
+
 
   const url = env.SENDGRID_URL
   const apiKey = env.SENDGRID_API_KEY
   const from = email
-  const to = email
   const subject = `Contact - ${name} ${surname}`
 
   const content = [
@@ -47,7 +54,7 @@ export async function sendContactEmail(
       url,
       apiKey,
       from,
-      to,
+      emailRecipient,
       content,
       subject
     )

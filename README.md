@@ -32,14 +32,16 @@ pnpm install
 
 3. Configure your `wrangler.toml`:
 
-Configuring the allowed origins for CORS (`ALLOWED_ORIGINS`), your binded emails (`send_email`) and your recipient email (`EMAIL`). 
+Configuring the allowed origins for CORS (`ALLOWED_ORIGINS`), your verified sendgrid email, which acts as a sender, (`SENDGRID_VERIFIED_SENDER`) and your recipient email (`EMAIL`). 
 
 ```toml
 send_email = [{type = "send_email", name = "FORM_BINDING", destination_address = "some-email@example.com"}]
 
 [vars]
 ALLOWED_ORIGINS=['*']
-EMAIL="some-email@example.com"
+SENDGRID_API_KEY="SOME_SENDGRID_API_KEY"
+SENDGRID_URL="https://api.sendgrid.com/v3/mail/send"
+SENDGRID_VERIFIED_SENDER="verified-sender@example.com"
 ```
 
 4. Run the project locally:
