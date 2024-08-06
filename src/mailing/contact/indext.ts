@@ -1,6 +1,5 @@
-import { EmailBody } from './models'
 import { Env } from '../../../worker-configuration'
-import { EmailResponse, EmailRequest } from '../sendgrid/models'
+import { EmailResponse } from '../sendgrid/models'
 import { sendEmail } from "../sendgrid/client";
 
 
