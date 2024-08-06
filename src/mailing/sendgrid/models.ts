@@ -16,6 +16,7 @@ type Subject = string
 
 interface Recipient {
     email: Email
+    name?: string
 }
 
 type EmailTo = Recipient[]
