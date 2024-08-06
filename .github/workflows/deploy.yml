@@ -24,8 +24,9 @@ jobs:
 
       - name: Update wrangler.toml
         run: |
-          sed -i 's/some-email@example.com/${{ secrets.EMAIL }}/g' wrangler.toml
+          sed -i 's/verified-sender@example.com/${{ secrets.SENDGRID_VERIFIED_SENDER }}/g' wrangler.toml
           sed -i 's/ALLOWED_ORIGINS=\[.*\]/ALLOWED_ORIGINS=${{ secrets.ALLOWED_ORIGINS }}/g' wrangler.toml
+          sed -i 's/SOME_SENDGRID_API_KEY/${{ secrets.SENDGRID_API_KEY }}/g' wrangler.toml
       
       - name: Install dependencies
         run: pnpm install
@@ -36,5 +37,6 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
         env:
           ALLOWED_ORIGINS: ${{ secrets.ALLOWED_ORIGINS }}
-          EMAIL: ${{ secrets.EMAIL }}
+          SENDGRID_VERIFIED_SENDER: ${{ secrets.SENDGRID_VERIFIED_SENDER }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
   
