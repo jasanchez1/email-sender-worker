@@ -5,7 +5,7 @@ This Cloudflare Worker handles form submissions and sends emails with optional f
 ## Features
 
 - Receives form data including name, email, message, and file attachment
-- Sends emails using a configured SMTP server
+- Sends emails using Sengrid
 - Handles file attachments
 - Implements CORS for cross-origin requests
 
