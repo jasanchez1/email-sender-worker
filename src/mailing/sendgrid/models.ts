@@ -31,7 +31,7 @@ interface Content {
     value: ContentValue
 }
 
-interface Attachment {
+export interface Attachment {
     type: AttachmentType
     filename: AttachmentFileName
     content: AttachmentValue

@@ -1,4 +1,5 @@
 import { Env } from "../worker-configuration";
+import { sendApplyEmail } from "./mailing/careers/apply";
 import { sendContactEmail } from "./mailing/contact/indext";
 import { corsResponse, handleCORS } from "./utils/handleCors";
 
@@ -21,7 +22,10 @@ export default {
 
 		switch (path) {
 			case '/contact':
-				const emailResponse = await sendContactEmail(request, env)
+				var emailResponse = await sendContactEmail(request, env)
+				return corsResponse(JSON.stringify(emailResponse), env, !emailResponse.error ? 200 : 500)
+			case '/careers/apply':
+				emailResponse = await sendApplyEmail(request, env)
 				return corsResponse(JSON.stringify(emailResponse), env, !emailResponse.error ? 200 : 500)
 			default:
 				return notFoundResponse

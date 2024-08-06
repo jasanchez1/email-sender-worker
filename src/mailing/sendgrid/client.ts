@@ -1,4 +1,4 @@
-import { EmailRequest, EmailResponse } from "./models";
+import { Attachment, EmailRequest, EmailResponse } from "./models";
 
 export async function sendEmail(
     url: string,
@@ -7,6 +7,7 @@ export async function sendEmail(
     to: string,
     content: string,
     subject?: string,
+    attachments?: Attachment[]
 ): Promise<EmailResponse> {
 
     const emailRequest: EmailRequest = {
@@ -20,7 +21,8 @@ export async function sendEmail(
         content: [{
             type: 'text/html',
             value: content,
-        }]
+        }],
+        attachments
     }
 
     const res = await fetch(url, {
