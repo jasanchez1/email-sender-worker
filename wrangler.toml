@@ -3,8 +3,9 @@ name = "mailing"
 main = "src/index.ts"
 compatibility_date = "2024-07-29"
 node_compat = true
-send_email = [{type = "send_email", name = "FORM_BINDING", destination_address = "some-email@example.com"}]
 
 [vars]
 ALLOWED_ORIGINS=['*']
-EMAIL="some-email@example.com"
+SENDGRID_API_KEY="SOME_SENDGRID_API_KEY"
+SENDGRID_URL="https://api.sendgrid.com/v3/mail/send"
+SENDGRID_VERIFIED_SENDER="verified-sender@example.com"

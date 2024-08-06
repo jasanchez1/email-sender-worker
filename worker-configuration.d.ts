@@ -3,6 +3,7 @@
 
 export interface Env {
 	ALLOWED_ORIGINS: string[];
-	EMAIL: string;
-	FORM_BINDING: SendEmail;
+	SENDGRID_URL: string
+	SENDGRID_API_KEY: string
+	SENDGRID_VERIFIED_SENDER: string
 }

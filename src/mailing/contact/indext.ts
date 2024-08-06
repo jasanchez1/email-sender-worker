@@ -1,8 +1,7 @@
-import { EmailMessage } from "cloudflare:email";
-import { createMimeMessage } from "mimetext";
 import { EmailBody } from './models'
 import { Env } from '../../../worker-configuration'
-import { EmailResponse } from '../models'
+import { EmailResponse, EmailRequest } from '../sendgrid/models'
+import { sendEmail } from "../sendgrid/client";
 
 
 export async function sendContactEmail(
@@ -15,43 +14,43 @@ export async function sendContactEmail(
     throw new Error('No form data received')
   }
 
-  const body: Partial<EmailBody> = {}
-
-  for (const part of formData) {
-    body[part[0] as keyof EmailBody] = part[0].toString()
-  }
-
-  const email = env.EMAIL
+  const email = env.SENDGRID_VERIFIED_SENDER
 
   if (
     !email
   ) {
-    throw Error('Missing the email information.')
+    throw Error('Missing the sendgrid sender email information.')
   }
 
-  const msg = createMimeMessage();
-  msg.setSender({ name: email, addr: email });
-  msg.setRecipient(email);
-  msg.setSubject("An email generated in a worker")
-  msg.addMessage({
-    contentType: 'text/plain',
-    data: [
-      `Name: ${body.name}`,
-      `Surname: ${body.surname}`,
-      `Phone: ${body.phone}`,
-      `Email: ${body.email}`,
-      `Message: ${body.message ?? ''}`,
-    ].join('\n')
-  });
+  const name = formData.get('name')
+  const surname = formData.get('surname')
+  const phone = formData.get('phone')
+  const senderEmail = formData.get('email')
+  const message = formData.get('message')
 
-  var message = new EmailMessage(
-    email, // from
-    email, // to
-    msg.asRaw()
-  );
+  const url = env.SENDGRID_URL
+  const apiKey = env.SENDGRID_API_KEY
+  const from = email
+  const to = email
+  const subject = `Contact - ${name} ${surname}`
+
+  const content = [
+    `Name: ${name}`,
+    `Surname: ${surname}`,
+    `Phone: ${phone}`,
+    `Email: ${senderEmail}`,
+    `Message: ${message ?? ''}`,
+  ].join('\n')
 
   try {
-    const info = await env.FORM_BINDING.send(message);
+    await sendEmail(
+      url,
+      apiKey,
+      from,
+      to,
+      content,
+      subject
+    )
     return {
       success: 'success',
     }
