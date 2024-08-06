@@ -37,6 +37,6 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
         env:
           ALLOWED_ORIGINS: ${{ secrets.ALLOWED_ORIGINS }}
-          EMAIL: ${{ secrets.EMAIL }}
+          SENDGRID_VERIFIED_SENDER: ${{ secrets.SENDGRID_VERIFIED_SENDER }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
   
