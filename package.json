@@ -4,6 +4,8 @@
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev --remote",
+    "lint": "pnpm eslint .",
+    "lint:fix": "pnpm eslint --fix .",
     "start": "wrangler dev",
     "test": "vitest",
     "cf-typegen": "wrangler types"
@@ -11,10 +13,12 @@
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.4.5",
     "@cloudflare/workers-types": "^4.20240729.0",
-    "typescript": "^5.5.2",
+    "@eslint/js": "^9.8.0",
+    "@types/eslint__js": "^8.42.3",
+    "eslint": "^9.8.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.1",
     "vitest": "1.5.0",
     "wrangler": "^3.68.0"
-  },
-  "dependencies": {
   }
 }
