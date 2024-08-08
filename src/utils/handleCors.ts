@@ -2,7 +2,7 @@ import { Env } from "../../worker-configuration";
 
 // Helper function to handle CORS preflight requests
 export function handleCORS(request: Request, env: Env) {
-    let headers = request.headers;
+    const headers = request.headers;
     if (
         headers.get("Origin") !== null &&
         headers.get("Access-Control-Request-Method") !== null &&

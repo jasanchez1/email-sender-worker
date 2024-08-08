@@ -58,7 +58,7 @@ export async function sendApplyEmail(
         throw Error('The email recipient must be part of the request.')
     }
 
-    var attachments = [await formatAttachments(resume, `resume_${name}_${surname}.pdf`)]
+    const attachments = [await formatAttachments(resume, `resume_${name}_${surname}.pdf`)]
 
     if (coverLetter !== null){
         attachments.push(await formatAttachments(coverLetter, `cover_letter_${name}_${surname}.pdf`))
